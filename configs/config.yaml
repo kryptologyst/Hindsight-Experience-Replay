@@ -1,0 +1,48 @@
+# HER Training Configuration
+training:
+  episodes: 1000
+  max_steps_per_episode: 20
+  batch_size: 64
+  learning_rate: 0.001
+  gamma: 0.98
+  epsilon_start: 0.9
+  epsilon_end: 0.05
+  epsilon_decay: 0.995
+  target_update_frequency: 10
+  buffer_size: 10000
+  her_ratio: 0.8  # Ratio of hindsight experiences
+
+# Environment Configuration
+environment:
+  name: "bitflip"  # Options: bitflip, cartpole, gridworld
+  n_bits: 5
+  render_mode: null
+
+# Model Configuration
+model:
+  hidden_size: 64
+  num_layers: 2
+  activation: "relu"
+  device: "auto"  # auto, cpu, cuda
+
+# Logging Configuration
+logging:
+  log_level: "INFO"
+  log_frequency: 100
+  tensorboard_dir: "logs/tensorboard"
+  wandb_project: "her-rl-project"
+  save_checkpoints: true
+  checkpoint_frequency: 500
+
+# Visualization Configuration
+visualization:
+  plot_frequency: 50
+  save_plots: true
+  plot_dir: "logs/plots"
+  show_plots: false
+
+# HER Specific Configuration
+her:
+  strategy: "future"  # Options: future, final, episode
+  k_future: 4  # Number of future goals to sample
+  reward_function: "sparse"  # Options: sparse, dense
